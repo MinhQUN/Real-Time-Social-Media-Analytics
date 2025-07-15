@@ -29,8 +29,8 @@ class TwitterAutomationScheduler:
         # Example: technology hourly, stock_market every 30m, sports every 2h
         settings = COLLECTION_SETTINGS
         schedule.every().hour.do(self.job)                              # technology
-        schedule.every(30).minutes.do(self.job)                         # stock_market
-        schedule.every(2).hours.do(self.job)                            # sports
+        schedule.every(15).minutes.do(self.job)                         # stock_market
+        schedule.every(1).hours.do(self.job)                            # sports
 
         self.logger.info("Scheduler started")
         while True:
