@@ -19,7 +19,7 @@ class TwitterSentimentAnalyzer:
         )
         self.logger = logging.getLogger(__name__)
 
-    def analyze_sentiment(self, text: str) -> (float, str):
+    def analyze_sentiment(self, text: str) -> tuple[float, str]:
         """Return polarity (-1 to 1) and label."""
         if not isinstance(text, str) or text.strip()=="":
             return 0.0, 'neutral'
