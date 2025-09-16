@@ -6,11 +6,11 @@ Store your API keys securely here
 
 # Twitter API Configuration
 TWITTER_API_CONFIG = {
-    'consumer_key': 'V8IXh2jTrolGv295W14JHIgP7',
-    'consumer_secret': 'wHOcbthoEBgRauImFNzaBmcQixDnMnPIHjP9PbwcQB1srAaomA',
-    'access_token': '1812368902867046400-xnn3nwl5Royb1yDQQDMwJt2vWkWcP9',
-    'access_token_secret': 'ImIUOgy7TXZbD5p5uSlOqcFEjD3ZCRM42Hlg2FijKK5kE',
-    'bearer_token': 'AAAAAAAAAAAAAAAAAAAAALVE3AEAAAAAbmtxdWcYOBbxccvhngxsjMxGd7g%3DBpl0HNVD3LNSw017YzkXDxQrCR86TPX1V4SewKZDoGvecHM75C'  # For API v2
+    'consumer_key': 'v9Vw82UI140alk6utWKMUD1uh',
+    'consumer_secret': 'rsx3ANuLBEndkON6ULpo8NtNpc8QnvXviuU6lg264DxGRxNA8z',
+    'access_token': '11812368902867046400-bHldS78ssABVusPNWOsV6e1in9EufV',
+    'access_token_secret': 'm1jSqDc3LDrmCDjs8MiaK0wOR1qvrLsuUnuT4h27OMuHj',
+    'bearer_token': 'AAAAAAAAAAAAAAAAAAAAALVE3AEAAAAAenugthFNc3zY1rFkDvz%2FPbw9H2E%3DrwtaePSajrn5cuK4pQ1niSEIozdfgn2RQA8H3yNpIyeDuRJ3uC'  # For API v2
 }
 
 # API Rate Limits
