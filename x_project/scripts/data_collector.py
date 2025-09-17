@@ -90,28 +90,40 @@ class TwitterDataCollector:
         self.logger.info(f"Starting data collection for topic: {topic}")
         topic_config = TOPICS_CONFIG[topic]
         all_tweets = []
+
         queries = self.build_search_query(topic)
         per_query = max(1, count // len(queries))
 
         for query in queries:
             try:
-                tweets = self.client.search_recent_tweets(
+                response = self.client.search_recent_tweets(
                     query=query,
                     max_results=per_query,
-                    tweet_fields=[...]
-                ).data or []
+                    tweet_fields=[
+                        'id','text','created_at','author_id','public_metrics',
+                        'lang','entities','context_annotations','conversation_id'
+                    ],
+                    expansions=['author_id'],
+                    user_fields=['username','public_metrics','verified','location']
+                )
+                tweets = response.data or []
                 all_tweets.extend(tweets)
             except TooManyRequests:
-                self.logger.warning(f"Rate limit hit for query '{query}', skipping remaining queries for {topic}")
-                break  # exit loop rather than sleep
+                self.logger.warning(
+                    f"Rate limit hit for topic '{topic}'. "
+                    "Skipping remaining queries for this topic."
+                )
+                break  # Exit query loop immediately, no sleep
             except Exception as e:
                 self.logger.error(f"Error collecting tweets for query '{query}': {e}")
                 continue
 
-        # Convert whatever we have into DataFrame
+        # Map to DataFrame
         df = pd.DataFrame([self._map_v2_tweet(t) for t in all_tweets])
-        df['topic'] = topic
-        df['collection_timestamp'] = datetime.now()
+        if not df.empty:
+            df['topic'] = topic
+            df['collection_timestamp'] = datetime.now()
+
         self.logger.info(f"Collected {len(df)} tweets for topic: {topic}")
         return df
     
