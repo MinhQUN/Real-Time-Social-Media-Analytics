@@ -47,3 +47,27 @@ The `tweet.fields` query parameter value [Ellipsis] is not one of [article,attac
 2025-09-17 21:28:23,939 - scripts.data_collector - INFO - No tweets collected for topic: sports
 2025-09-17 21:28:23,939 - __main__ - WARNING - No tweets collected for sports
 2025-09-17 21:28:23,939 - __main__ - INFO - Pipeline complete
+2025-09-17 21:37:53,368 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-09-17 21:37:53,369 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-09-17 21:37:53,369 - __main__ - INFO - Collecting raw data for technology (count=200)
+2025-09-17 21:37:53,370 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-09-17 21:37:53,370 - tweepy.client - WARNING - Unexpected parameter: wait_on_rate_limit
+2025-09-17 21:37:53,626 - scripts.data_collector - ERROR - Error collecting tweets for query '#AI OR #MachineLearning OR #TechNews': 400 Bad Request
+The query parameter [wait_on_rate_limit] is not one of [query,start_time,end_time,since_id,until_id,max_results,next_token,pagination_token,sort_order,expansions,tweet.fields,media.fields,poll.fields,place.fields,user.fields]
+2025-09-17 21:37:53,626 - tweepy.client - WARNING - Unexpected parameter: wait_on_rate_limit
+2025-09-17 21:37:53,836 - scripts.data_collector - WARNING - Rate limit hit for 'technology' on query 'artificial intelligence lang:en'. Skipping remaining queries.
+2025-09-17 21:37:53,860 - scripts.data_collector - INFO - No tweets collected for topic: technology
+2025-09-17 21:37:53,860 - __main__ - WARNING - No tweets collected for technology
+2025-09-17 21:37:53,860 - __main__ - INFO - Collecting raw data for stock_market (count=150)
+2025-09-17 21:37:53,860 - scripts.data_collector - INFO - Starting data collection for topic: stock_market
+2025-09-17 21:37:53,860 - tweepy.client - WARNING - Unexpected parameter: wait_on_rate_limit
+2025-09-17 21:37:54,079 - scripts.data_collector - WARNING - Rate limit hit for 'stock_market' on query '#StockMarket OR #Trading OR #Investing'. Skipping remaining queries.
+2025-09-17 21:37:54,079 - scripts.data_collector - INFO - No tweets collected for topic: stock_market
+2025-09-17 21:37:54,080 - __main__ - WARNING - No tweets collected for stock_market
+2025-09-17 21:37:54,080 - __main__ - INFO - Collecting raw data for sports (count=250)
+2025-09-17 21:37:54,080 - scripts.data_collector - INFO - Starting data collection for topic: sports
+2025-09-17 21:37:54,080 - tweepy.client - WARNING - Unexpected parameter: wait_on_rate_limit
+2025-09-17 21:37:54,296 - scripts.data_collector - WARNING - Rate limit hit for 'sports' on query '#Sports OR #Football OR #Basketball'. Skipping remaining queries.
+2025-09-17 21:37:54,297 - scripts.data_collector - INFO - No tweets collected for topic: sports
+2025-09-17 21:37:54,297 - __main__ - WARNING - No tweets collected for sports
+2025-09-17 21:37:54,297 - __main__ - INFO - Pipeline complete
