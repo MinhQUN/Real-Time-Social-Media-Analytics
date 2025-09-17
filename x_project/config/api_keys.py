@@ -1,7 +1,6 @@
-# config/api_keys.py
 """
 Twitter API credentials configuration
-Store your API keys securely here
+Store API keys securely here
 """
 
 # Twitter API Configuration
@@ -17,5 +16,5 @@ TWITTER_API_CONFIG = {
 RATE_LIMITS = {
     'tweets_per_request': 100,
     'requests_per_15_min': 180,
-    'daily_tweet_limit': 500000
+    'monthly_write_limit': 500
 }

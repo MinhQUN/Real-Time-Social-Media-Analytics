@@ -1,4 +1,3 @@
-# config/settings.py
 """
 General application settings and configurations
 """
