@@ -67,6 +67,7 @@ class TwitterDataCollector:
                 consumer_secret=TWITTER_API_CONFIG['consumer_secret'],
                 access_token=TWITTER_API_CONFIG['access_token'],
                 access_token_secret=TWITTER_API_CONFIG['access_token_secret'],
+                wait_on_rate_limit=True
             )
 
             self.logger.info("Authentication successful (OAuth1.0a and OAuth2.0 initialized)")
