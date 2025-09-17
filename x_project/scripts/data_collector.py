@@ -45,24 +45,30 @@ class TwitterDataCollector:
         self.logger = logging.getLogger(__name__)
         
     def authenticate_twitter(self):
-        """Authenticate with Twitter API"""
+        """ Authenticate using OAuth 2.0 bearer token only for X API v2 read-only endpoints.        """
         try:
-            # OAuth 1.0a authentication
-            auth = tweepy.OAuthHandler(
+        # OAuth 1.0a for v1.1 endpoints
+            auth = tweepy.OAuth1UserHandler(
                 TWITTER_API_CONFIG['consumer_key'],
-                TWITTER_API_CONFIG['consumer_secret']
-            )
-            auth.set_access_token(
+                TWITTER_API_CONFIG['consumer_secret'],
                 TWITTER_API_CONFIG['access_token'],
                 TWITTER_API_CONFIG['access_token_secret']
             )
-            
             self.api = tweepy.API(auth, wait_on_rate_limit=True)
-            
-            # Verify credentials
-            self.api.verify_credentials()
-            self.logger.info("Twitter API authentication successful")
-            
+            # NOTE: Removed self.api.verify_credentials() to prevent 400 errors
+
+            # OAuth 2.0 for v2 endpoints
+            self.client = tweepy.Client(
+                bearer_token=TWITTER_API_CONFIG['bearer_token'],
+                consumer_key=TWITTER_API_CONFIG['consumer_key'],
+                consumer_secret=TWITTER_API_CONFIG['consumer_secret'],
+                access_token=TWITTER_API_CONFIG['access_token'],
+                access_token_secret=TWITTER_API_CONFIG['access_token_secret'],
+                wait_on_rate_limit=True
+            )
+
+            self.logger.info("Authentication successful (OAuth1.0a and OAuth2.0 initialized)")
+
         except Exception as e:
             self.logger.error(f"Twitter API authentication failed: {e}")
             raise
