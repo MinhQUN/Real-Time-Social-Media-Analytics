@@ -17,7 +17,7 @@ from scripts.data_cleaner import TwitterDataCleaner
 from scripts.data_processor import TwitterDataProcessor
 from scripts.sentiment_analyzer import TwitterSentimentAnalyzer
 from scripts.automation_scheduler import TwitterAutomationScheduler
-
+from scripts.realtime_collector import RealTimeCollector
 from config import LOGS_DIR, TOPICS_CONFIG
 
 def setup_main_logging():
@@ -86,6 +86,37 @@ def collect_and_process_data():
     except Exception as e:
         logger.error(f"Error in main workflow: {e}")
         raise
+
+def start_realtime_mode():
+    """Start continuous real-time collection and processing"""
+    logger = setup_main_logging()
+    logger.info("Starting real-time data collection mode")
+    
+    try:
+        collector = RealTimeCollector()
+        threads = collector.start_realtime_collection()
+        
+        print("🔄 Real-time collection started. Press Ctrl+C to stop...")
+        print("📊 Data will be saved continuously as it's collected")
+        print("📁 Check data/raw/, data/cleaned/, and tableau_data/ for files")
+        
+        while True:
+            time.sleep(1)
+            
+    except KeyboardInterrupt:
+        print("\n📤 Stopping real-time collection...")
+        collector.stop_collection()
+        
+        # Wait for threads to finish
+        for thread in threads:
+            thread.join(timeout=5)
+            
+        logger.info("Real-time collection stopped by user")
+        print("✅ Real-time collection stopped successfully")
+        
+    except Exception as e:
+        logger.error(f"Error in real-time mode: {e}")
+        print(f"Real-time collection failed: {e}")
 
 def main():
     """Main function with command line argument parsing"""
