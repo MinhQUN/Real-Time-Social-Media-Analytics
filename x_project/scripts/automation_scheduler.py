@@ -1,5 +1,4 @@
 # scripts/automation_scheduler.py
-
 import schedule
 import time
 import logging
@@ -26,7 +25,7 @@ class TwitterAutomationScheduler:
 
     def start_scheduled_collection(self):
         """Schedule jobs per topic settings."""
-        # Example: technology hourly, stock_market every 30m, sports every 2h
+        # Example: technology hourly, stock_market every 30m, sports every 1h
         settings = COLLECTION_SETTINGS
         schedule.every().hour.do(self.job)                              # technology
         schedule.every(15).minutes.do(self.job)                         # stock_market
