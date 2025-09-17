@@ -18,6 +18,7 @@ from config import (
 )
 
 from tweepy.errors import TooManyRequests
+from typing import List
 
 class TwitterDataCollector:
     """
@@ -47,7 +48,7 @@ class TwitterDataCollector:
         self.logger = logging.getLogger(__name__)
         
     def authenticate_twitter(self):
-        """ Authenticate using OAuth 2.0 bearer token only for X API v2 read-only endpoints.        """
+        """ Authenticate using OAuth 2.0 bearer token only for X API v2 read-only endpoints."""
         try:
         # OAuth 1.0a for v1.1 endpoints
             auth = tweepy.OAuth1UserHandler(
@@ -74,6 +75,17 @@ class TwitterDataCollector:
             self.logger.error(f"Twitter API authentication failed: {e}")
             raise
     
+    def build_search_query(self, topic: str) -> List[str]:
+        """
+        Build simple search queries for the given topic. This returns the list of queries from TOPICS_CONFIG.
+        """
+        from config import TOPICS_CONFIG
+
+        if topic not in TOPICS_CONFIG:
+            raise ValueError(f"Unknown topic: {topic}")
+        return TOPICS_CONFIG[topic].get('search_queries', [])
+
+
     def collect_tweets_for_topic(self, topic: str, count: int = 100) -> pd.DataFrame:
         self.logger.info(f"Starting data collection for topic: {topic}")
         topic_config = TOPICS_CONFIG[topic]
