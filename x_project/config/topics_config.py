@@ -9,20 +9,20 @@ TOPICS_CONFIG = {
         'hashtags': [
             '#AI', '#MachineLearning', '#TechNews', '#Innovation', 
             '#SoftwareDevelopment', '#DataScience', '#CloudComputing',
-            '#Cybersecurity', '#IoT', '#Blockchain', '#TechTrends', '#BigData', '#DigitalTransformation', '#Automation'
+            '#Cybersecurity', '#IoT', '#Blockchain', '#TechTrends', '#BigData', '#DigitalTransformation', '#Automation', '#Programming', '#TechStartup', '#Gadgets', '#5G', '#ARVR', '#QuantumComputing', '#EdgeComputing', '#DevOps', '#SaaS', '#FinTech', '#Robotics', '#technology'
         ],
         'keywords': [
             'artificial intelligence', 'machine learning', 'programming',
             'software development', 'tech startup', 'innovation',
             'digital transformation', 'automation', 'technology trends',
-            'cloud services', 'data analytics', 'cybersecurity threats','technology'
+            'cloud services', 'data analytics', 'cybersecurity threats','technology', 'tech news', 'blockchain technology', 'internet of things', 'iot devices', 'quantum computing', '5g technology', 'augmented reality', 'virtual reality', 'vr ar', 'big data analytics', 'devops practices', 'saas solutions', 'fintech innovations', 'robotics advancements'
         ],
         'search_queries': [
             '#AI OR #MachineLearning OR #TechNews',
             'artificial intelligence lang:en',
             'software development trends',
             '#Innovation OR #TechTrends', 'digital transformation',
-            'cloud computing OR cybersecurity',
+            'cloud computing OR cybersecurity', '#Blockchain OR #IoT', 'big data OR data analytics', 'automation OR programming', '#Robotics OR #FinTech'
         ]
     },
     
@@ -30,7 +30,7 @@ TOPICS_CONFIG = {
         'hashtags': [
             '#StockMarket', '#Trading', '#Investing', '#Finance',
             '#WallStreet', '#Stocks', '#Investment', '#MarketNews',
-            '#FinTech', '#Crypto', '#Bitcoin', '#NYSE', '#NASDAQ', '#FinancialNews', '#MarketAnalysis','#bitcoin', '#cryptocurrency'
+            '#FinTech', '#Crypto', '#Bitcoin', '#NYSE', '#NASDAQ', '#FinancialNews', '#MarketAnalysis','#bitcoin', '#cryptocurrency', '#investing', '#trading', '#stocktrading', '#financialmarkets', '#forex', '#dividends', '#earningsreport', '#portfolio', '#bullmarket', '#bearmarket', '#stockanalysis', '#xrp', '#ethereum', '#cryptocurrencytrading', '#cryptomarket'
         ],
         'keywords': [
             'stock market', 'trading', 'investing', 'financial markets',
@@ -41,7 +41,7 @@ TOPICS_CONFIG = {
             '#StockMarket OR #Trading OR #Investing',
             'stock market news lang:en',
             '#Finance OR #WallStreet',
-            'market analysis OR trading tips'
+            'market analysis OR trading tips', '#Crypto OR #Bitcoin', 'financial news OR investment strategies', 'earnings report OR dividends'
         ]
     },
     
@@ -61,7 +61,7 @@ TOPICS_CONFIG = {
             '#Sports OR #Football OR #Basketball',
             'sports news lang:en',
             '#NFL OR #NBA OR #MLB',
-            'championship OR tournament','sports analysis OR team performance', 'sports updates OR sports highlights'
+            'championship OR tournament','sports analysis OR team performance', 'sports updates OR sports highlights', 'olympics OR fifa', 'sports events OR sports community', 'sports fans OR athletics'
         ]
     }
 }
@@ -70,7 +70,7 @@ TOPICS_CONFIG = {
 COLLECTION_SETTINGS = {
     'technology': {
         'tweets_per_collection': 200,
-        'collection_frequency': 'hourly',
+        'collection_frequency': 'every_hour',
         'max_age_days': 7
     },
     'stock_market': {
