@@ -69,17 +69,17 @@ TOPICS_CONFIG = {
 # Collection settings for each topic
 COLLECTION_SETTINGS = {
     'technology': {
-        'tweets_per_collection': 200,
+        'tweets_per_collection': 5,
         'collection_frequency': 'every_hour',
         'max_age_days': 7
     },
     'stock_market': {
-        'tweets_per_collection': 150,
+        'tweets_per_collection': 10,
         'collection_frequency': 'every_30_minutes',
         'max_age_days': 3
     },
     'sports': {
-        'tweets_per_collection': 250,
+        'tweets_per_collection': 5,
         'collection_frequency': 'every_2_hours',
         'max_age_days': 5
     }

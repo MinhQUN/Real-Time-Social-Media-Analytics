@@ -106,7 +106,7 @@ def start_realtime_mode():
             thread.join(timeout=5)
         logger.info("Real-time collection stopped by user")
         print("✅ Real-time collection stopped successfully")
-        
+
     except Exception as e:
         logger.error(f"Error in real-time mode: {e}", exc_info=True)
         print(f"❌ Real-time collection failed: {e}")
@@ -129,7 +129,7 @@ def main():
     parser.add_argument(
         '--count',
         type=int,
-        default=200,
+        default=10,
         help='Number of tweets to collect per topic (only for collect mode)'
     )
     
