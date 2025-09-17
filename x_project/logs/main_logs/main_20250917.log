@@ -21,3 +21,8 @@ The `tweet.fields` query parameter value [Ellipsis] is not one of [article,attac
 2025-09-17 21:13:36,444 - scripts.data_collector - INFO - Starting data collection for topic: technology
 2025-09-17 21:13:36,703 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 8 seconds.
 2025-09-17 21:13:45,481 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 900 seconds.
+2025-09-17 21:16:38,070 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-09-17 21:16:38,071 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-09-17 21:16:38,072 - __main__ - INFO - Collecting raw data for technology (count=200)
+2025-09-17 21:16:38,072 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-09-17 21:16:38,342 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 727 seconds.
