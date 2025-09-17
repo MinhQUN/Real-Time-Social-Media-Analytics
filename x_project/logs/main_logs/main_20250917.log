@@ -153,3 +153,28 @@ The `max_results` query parameter value [1] is not between 10 and 100
 2025-09-17 21:56:14,944 - scripts.data_collector - INFO - No tweets collected for topic: sports
 2025-09-17 21:56:14,944 - __main__ - WARNING - No tweets collected for sports
 2025-09-17 21:56:14,944 - __main__ - INFO - Pipeline complete
+2025-09-17 22:00:23,697 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-09-17 22:00:23,698 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-09-17 22:00:23,698 - __main__ - INFO - Collecting raw data for technology (count=5)
+2025-09-17 22:00:23,698 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-09-17 22:00:23,960 - scripts.data_collector - WARNING - Rate limit hit for 'technology' on query '#AI OR #MachineLearning OR #TechNews'. Skipping remaining queries.
+2025-09-17 22:00:23,962 - scripts.data_collector - INFO - No tweets collected for topic: technology
+2025-09-17 22:00:23,962 - __main__ - WARNING - No tweets collected for technology
+2025-09-17 22:00:23,962 - __main__ - INFO - Collecting raw data for stock_market (count=10)
+2025-09-17 22:00:23,962 - scripts.data_collector - INFO - Starting data collection for topic: stock_market
+2025-09-17 22:00:24,166 - scripts.data_collector - WARNING - Rate limit hit for 'stock_market' on query '#StockMarket OR #Trading OR #Investing'. Skipping remaining queries.
+2025-09-17 22:00:24,167 - scripts.data_collector - INFO - No tweets collected for topic: stock_market
+2025-09-17 22:00:24,167 - __main__ - WARNING - No tweets collected for stock_market
+2025-09-17 22:00:24,167 - __main__ - INFO - Collecting raw data for sports (count=5)
+2025-09-17 22:00:24,167 - scripts.data_collector - INFO - Starting data collection for topic: sports
+2025-09-17 22:00:24,373 - scripts.data_collector - WARNING - Rate limit hit for 'sports' on query '#Sports OR #Football OR #Basketball'. Skipping remaining queries.
+2025-09-17 22:00:24,373 - scripts.data_collector - INFO - No tweets collected for topic: sports
+2025-09-17 22:00:24,374 - __main__ - WARNING - No tweets collected for sports
+2025-09-17 22:00:24,374 - __main__ - INFO - Pipeline complete
+2025-09-17 22:01:33,767 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-09-17 22:01:33,767 - scripts.data_collector - ERROR - Twitter API authentication failed: BaseClient.__init__() got an unexpected keyword argument 'watt_on_rate_limit'
+2025-09-17 22:02:03,172 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-09-17 22:02:03,172 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-09-17 22:02:03,172 - __main__ - INFO - Collecting raw data for technology (count=5)
+2025-09-17 22:02:03,172 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-09-17 22:02:03,428 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 552 seconds.
