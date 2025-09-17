@@ -17,6 +17,8 @@ from config import (
     COLLECTION_SETTINGS, DATA_DIR, LOGS_DIR, FILE_NAMING
 )
 
+from tweepy.errors import TooManyRequests
+
 class TwitterDataCollector:
     """
     Advanced Twitter data collector with multi-topic support
@@ -73,34 +75,31 @@ class TwitterDataCollector:
             raise
     
     def collect_tweets_for_topic(self, topic: str, count: int = 100) -> pd.DataFrame:
-        if topic not in TOPICS_CONFIG:
-            raise ValueError(f"Unknown topic: {topic}")
-        
         self.logger.info(f"Starting data collection for topic: {topic}")
-        
         topic_config = TOPICS_CONFIG[topic]
         all_tweets = []
-        
-        # Collect tweets using different search strategies
-        for query in topic_config['search_queries']:
+        queries = self.build_search_query(topic)
+        per_query = max(1, count // len(queries))
+
+        for query in queries:
             try:
-                tweets = self.collect_tweets_by_query(query, count // len(topic_config['search_queries']))
+                tweets = self.client.search_recent_tweets(
+                    query=query,
+                    max_results=per_query,
+                    tweet_fields=[...]
+                ).data or []
                 all_tweets.extend(tweets)
-                
-                # Rate limiting
-                time.sleep(1)
-                
+            except TooManyRequests:
+                self.logger.warning(f"Rate limit hit for query '{query}', skipping remaining queries for {topic}")
+                break  # exit loop rather than sleep
             except Exception as e:
                 self.logger.error(f"Error collecting tweets for query '{query}': {e}")
                 continue
-        
-        # Convert to DataFrame
-        df = pd.DataFrame(all_tweets)
-        
-        if not df.empty:
-            df['topic'] = topic
-            df['collection_timestamp'] = datetime.now()
-            
+
+        # Convert whatever we have into DataFrame
+        df = pd.DataFrame([self._map_v2_tweet(t) for t in all_tweets])
+        df['topic'] = topic
+        df['collection_timestamp'] = datetime.now()
         self.logger.info(f"Collected {len(df)} tweets for topic: {topic}")
         return df
     
