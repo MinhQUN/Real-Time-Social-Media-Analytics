@@ -128,3 +128,8 @@ The query parameter [wait_on_rate_limit] is not one of [query,start_time,end_tim
 2025-09-17 21:48:27,308 - scripts.data_collector - INFO - No tweets collected for topic: sports
 2025-09-17 21:48:27,308 - __main__ - WARNING - No tweets collected for sports
 2025-09-17 21:48:27,308 - __main__ - INFO - Pipeline complete
+2025-09-17 21:51:19,394 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-09-17 21:51:19,395 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-09-17 21:51:19,396 - __main__ - INFO - Collecting raw data for technology (count=5)
+2025-09-17 21:51:19,396 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-09-17 21:51:19,681 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 95 seconds.
