@@ -19,6 +19,7 @@ from config import (
 
 from tweepy.errors import TooManyRequests
 from typing import List
+from tweepy import Paginator
 
 class TwitterDataCollector:
     """
@@ -66,7 +67,7 @@ class TwitterDataCollector:
                 consumer_secret=TWITTER_API_CONFIG['consumer_secret'],
                 access_token=TWITTER_API_CONFIG['access_token'],
                 access_token_secret=TWITTER_API_CONFIG['access_token_secret'],
-                wait_on_rate_limit=True
+                wait_on_rate_limit=False
             )
 
             self.logger.info("Authentication successful (OAuth1.0a and OAuth2.0 initialized)")
@@ -88,32 +89,41 @@ class TwitterDataCollector:
 
     def collect_tweets_for_topic(self, topic: str, count: int = 100) -> pd.DataFrame:
         self.logger.info(f"Starting data collection for topic: {topic}")
-        topic_config = TOPICS_CONFIG[topic]
         all_tweets = []
-
         queries = self.build_search_query(topic)
         per_query = max(1, count // len(queries))
 
         for query in queries:
             try:
-                response = self.client.search_recent_tweets(
+                # Use Paginator for manual rate‐limit control
+                paginator = Paginator(
+                    self.client.search_recent_tweets,
                     query=query,
-                    max_results=per_query,
                     tweet_fields=[
                         'id','text','created_at','author_id','public_metrics',
                         'lang','entities','context_annotations','conversation_id'
                     ],
                     expansions=['author_id'],
-                    user_fields=['username','public_metrics','verified','location']
+                    user_fields=['username','public_metrics','verified','location'],
+                    max_results=per_query,
+                    limit=1,                    # only one batch per query
+                    wait_on_rate_limit=False    # disable auto‐sleep
                 )
-                tweets = response.data or []
+
+                # flatten yields Tweet objects up to per_query
+                tweets = []
+                for tweet in paginator.flatten(limit=per_query):
+                    tweets.append(tweet)
+
                 all_tweets.extend(tweets)
+
             except TooManyRequests:
                 self.logger.warning(
-                    f"Rate limit hit for topic '{topic}'. "
-                    "Skipping remaining queries for this topic."
+                    f"Rate limit hit for '{topic}' on query '{query}'. "
+                    "Skipping remaining queries."
                 )
-                break  # Exit query loop immediately, no sleep
+                break
+
             except Exception as e:
                 self.logger.error(f"Error collecting tweets for query '{query}': {e}")
                 continue
@@ -123,8 +133,10 @@ class TwitterDataCollector:
         if not df.empty:
             df['topic'] = topic
             df['collection_timestamp'] = datetime.now()
+            self.logger.info(f"Collected {len(df)} tweets for topic: {topic}")
+        else:
+            self.logger.info(f"No tweets collected for topic: {topic}")
 
-        self.logger.info(f"Collected {len(df)} tweets for topic: {topic}")
         return df
     
 
