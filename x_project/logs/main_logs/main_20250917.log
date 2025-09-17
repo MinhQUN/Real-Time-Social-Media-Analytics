@@ -1,0 +1,23 @@
+2025-09-17 20:58:43,729 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-09-17 20:58:43,730 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-09-17 20:58:43,731 - __main__ - INFO - Collecting raw data for technology (count=200)
+2025-09-17 20:58:43,731 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-09-17 20:58:44,012 - scripts.data_collector - ERROR - Error collecting tweets for query '#AI OR #MachineLearning OR #TechNews': 400 Bad Request
+The `tweet.fields` query parameter value [Ellipsis] is not one of [article,attachments,author_id,card_uri,community_id,context_annotations,conversation_id,created_at,display_text_range,edit_controls,edit_history_tweet_ids,entities,geo,id,in_reply_to_user_id,lang,media_metadata,non_public_metrics,note_tweet,organic_metrics,possibly_sensitive,promoted_metrics,public_metrics,referenced_tweets,reply_settings,scopes,source,suggested_source_links,text,withheld]
+2025-09-17 20:58:44,218 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 900 seconds.
+2025-09-17 21:07:08,241 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-09-17 21:07:08,241 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-09-17 21:07:08,242 - __main__ - INFO - Collecting raw data for technology (count=200)
+2025-09-17 21:07:08,242 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-09-17 21:07:08,511 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 396 seconds.
+2025-09-17 21:13:10,973 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-09-17 21:13:10,974 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-09-17 21:13:10,974 - __main__ - INFO - Collecting raw data for technology (count=200)
+2025-09-17 21:13:10,974 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-09-17 21:13:11,253 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 33 seconds.
+2025-09-17 21:13:36,443 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-09-17 21:13:36,444 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-09-17 21:13:36,444 - __main__ - INFO - Collecting raw data for technology (count=200)
+2025-09-17 21:13:36,444 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-09-17 21:13:36,703 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 8 seconds.
+2025-09-17 21:13:45,481 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 900 seconds.
