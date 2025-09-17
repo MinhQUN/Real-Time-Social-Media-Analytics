@@ -106,7 +106,6 @@ class TwitterDataCollector:
                     user_fields=['username','public_metrics','verified','location'],
                     max_results=per_query,
                     limit=1,                    # only one batch per query
-                    wait_on_rate_limit=False    # disable auto‐sleep
                 )
 
                 # flatten yields Tweet objects up to per_query
