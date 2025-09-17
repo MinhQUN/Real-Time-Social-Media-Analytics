@@ -123,9 +123,22 @@ class TwitterDataCollector:
             response = self.client.search_recent_tweets(
                 query=query,
                 max_results=min(count, RATE_LIMITS['tweets_per_request']),
-                tweet_fields=['created_at','author_id','public_metrics','text','entities','lang'],
+                tweet_fields=[
+                    'id',
+                    'text',
+                    'created_at',
+                    'author_id',
+                    'public_metrics',
+                    'lang',
+                    'entities',
+                    'context_annotations',
+                    'conversation_id',
+                    'in_reply_to_user_id',
+                    'referenced_tweets',
+                    'source'
+                ],
                 expansions=['author_id'],
-                user_fields=['username','public_metrics','verified','location'],
+                user_fields=['username','public_metrics','verified','location']
             )
             tweets = response.data or []
 
