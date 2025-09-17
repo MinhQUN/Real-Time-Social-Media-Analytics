@@ -1,9 +1,17 @@
+# scripts/realtime_collector.py
+"""
+Real-time continuous data collection and processing
+"""
+
 import threading
 import queue
 import time
 from datetime import datetime
+import logging
+
 from scripts.data_collector import TwitterDataCollector
 from scripts.data_processor import TwitterDataProcessor
+from config import COLLECTION_SETTINGS
 
 class RealTimeCollector:
     def __init__(self):
@@ -11,13 +19,14 @@ class RealTimeCollector:
         self.collector = TwitterDataCollector()
         self.processor = TwitterDataProcessor()
         self.running = False
+        self.logger = logging.getLogger(__name__)
         
     def continuous_collect(self, topic):
         """Continuously collect data for a topic and immediately process it"""
         while self.running:
             try:
-                # Collect small batch (10-20 tweets)
-                df = self.collector.collect_tweets_for_topic(topic, count=20)
+                # Collect small batch (10-20 tweets to manage quota)
+                df = self.collector.collect_tweets_for_topic(topic, count=15)
                 
                 if not df.empty:
                     # Immediately save raw data
@@ -28,16 +37,27 @@ class RealTimeCollector:
                     tableau_files = self.processor.save_tableau_data({topic: processed})
                     
                     print(f"✅ {topic}: Collected {len(df)} tweets, saved to {tableau_files.get(topic, 'N/A')}")
-                
-                # Wait based on collection frequency
-                settings = COLLECTION_SETTINGS.get(topic, {})
-                if settings.get('collection_frequency') == 'every_30_minutes':
-                    time.sleep(1800)  # 30 minutes
+                    self.logger.info(f"Real-time collection: {topic} - {len(df)} tweets processed")
                 else:
-                    time.sleep(3600)  # 1 hour default
+                    print(f"⚠️ {topic}: No new tweets found")
+                
+                # Wait based on collection frequency from config
+                settings = COLLECTION_SETTINGS.get(topic, {})
+                frequency = settings.get('collection_frequency', 'every_hour')
+                
+                if frequency == 'every_30_minutes':
+                    sleep_time = 1800  # 30 minutes
+                elif frequency == 'every_2_hours':
+                    sleep_time = 7200  # 2 hours
+                else:  # every_hour default
+                    sleep_time = 3600  # 1 hour
+                
+                print(f"💤 {topic}: Sleeping for {sleep_time//60} minutes...")
+                time.sleep(sleep_time)
                     
             except Exception as e:
                 print(f"Error in continuous collection for {topic}: {e}")
+                self.logger.error(f"Real-time collection error for {topic}: {e}")
                 time.sleep(300)  # 5 minute pause on error
 
     def start_realtime_collection(self):
@@ -45,12 +65,15 @@ class RealTimeCollector:
         self.running = True
         threads = []
         
-        for topic in ['technology', 'stock_market', 'sports']:
+        topics = list(COLLECTION_SETTINGS.keys())
+        
+        for topic in topics:
             thread = threading.Thread(target=self.continuous_collect, args=(topic,))
             thread.daemon = True
             thread.start()
             threads.append(thread)
-            print(f"🚀 Started real-time collection for {topic}")
+            print(f"🚀 Started real-time collection thread for {topic}")
+            time.sleep(2)  # Stagger thread starts
         
         return threads
 
