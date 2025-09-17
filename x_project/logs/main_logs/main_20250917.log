@@ -133,3 +133,23 @@ The query parameter [wait_on_rate_limit] is not one of [query,start_time,end_tim
 2025-09-17 21:51:19,396 - __main__ - INFO - Collecting raw data for technology (count=5)
 2025-09-17 21:51:19,396 - scripts.data_collector - INFO - Starting data collection for topic: technology
 2025-09-17 21:51:19,681 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 95 seconds.
+2025-09-17 21:56:14,069 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-09-17 21:56:14,069 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-09-17 21:56:14,070 - __main__ - INFO - Collecting raw data for technology (count=5)
+2025-09-17 21:56:14,070 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-09-17 21:56:14,320 - scripts.data_collector - ERROR - Error collecting tweets for query '#AI OR #MachineLearning OR #TechNews': 400 Bad Request
+The `max_results` query parameter value [1] is not between 10 and 100
+2025-09-17 21:56:14,527 - scripts.data_collector - WARNING - Rate limit hit for 'technology' on query 'artificial intelligence lang:en'. Skipping remaining queries.
+2025-09-17 21:56:14,528 - scripts.data_collector - INFO - No tweets collected for topic: technology
+2025-09-17 21:56:14,528 - __main__ - WARNING - No tweets collected for technology
+2025-09-17 21:56:14,528 - __main__ - INFO - Collecting raw data for stock_market (count=10)
+2025-09-17 21:56:14,528 - scripts.data_collector - INFO - Starting data collection for topic: stock_market
+2025-09-17 21:56:14,736 - scripts.data_collector - WARNING - Rate limit hit for 'stock_market' on query '#StockMarket OR #Trading OR #Investing'. Skipping remaining queries.
+2025-09-17 21:56:14,736 - scripts.data_collector - INFO - No tweets collected for topic: stock_market
+2025-09-17 21:56:14,736 - __main__ - WARNING - No tweets collected for stock_market
+2025-09-17 21:56:14,736 - __main__ - INFO - Collecting raw data for sports (count=5)
+2025-09-17 21:56:14,737 - scripts.data_collector - INFO - Starting data collection for topic: sports
+2025-09-17 21:56:14,943 - scripts.data_collector - WARNING - Rate limit hit for 'sports' on query '#Sports OR #Football OR #Basketball'. Skipping remaining queries.
+2025-09-17 21:56:14,944 - scripts.data_collector - INFO - No tweets collected for topic: sports
+2025-09-17 21:56:14,944 - __main__ - WARNING - No tweets collected for sports
+2025-09-17 21:56:14,944 - __main__ - INFO - Pipeline complete

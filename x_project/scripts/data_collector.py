@@ -90,7 +90,7 @@ class TwitterDataCollector:
         self.logger.info(f"Starting data collection for topic: {topic}")
         all_tweets = []
         queries = self.build_search_query(topic)
-        per_query = max(1, count // len(queries))
+        per_query = max(10, min(RATE_LIMITS['tweets_per_request'], count // len(queries)))
 
         for query in queries:
             try:
