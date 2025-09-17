@@ -55,7 +55,6 @@ class TwitterDataCollector:
                 TWITTER_API_CONFIG['access_token_secret']
             )
             self.api = tweepy.API(auth, wait_on_rate_limit=True)
-            # NOTE: Removed self.api.verify_credentials() to prevent 400 errors
 
             # OAuth 2.0 for v2 endpoints
             self.client = tweepy.Client(
@@ -74,16 +73,6 @@ class TwitterDataCollector:
             raise
     
     def collect_tweets_for_topic(self, topic: str, count: int = 100) -> pd.DataFrame:
-        """
-        Collect tweets for a specific topic
-        
-        Args:
-            topic: Topic name ('technology', 'stock_market', 'sports')
-            count: Number of tweets to collect
-            
-        Returns:
-            DataFrame containing tweet data
-        """
         if topic not in TOPICS_CONFIG:
             raise ValueError(f"Unknown topic: {topic}")
         
@@ -115,61 +104,42 @@ class TwitterDataCollector:
         self.logger.info(f"Collected {len(df)} tweets for topic: {topic}")
         return df
     
+
     def collect_tweets_by_query(self, query: str, count: int) -> List[Dict[str, Any]]:
-        """
-        Collect tweets using a specific search query
-        
-        Args:
-            query: Search query string
-            count: Number of tweets to collect
-            
-        Returns:
-            List of tweet dictionaries
-        """
         tweets_data = []
-        
         try:
-            tweets = tweepy.Cursor(
-                self.api.search_tweets,
-                q=query,
-                tweet_mode='extended',
-                lang='en',
-                result_type='mixed'
-            ).items(count)
-            
+            # Use v2 search_recent_tweets
+            response = self.client.search_recent_tweets(
+                query=query,
+                max_results=min(count, RATE_LIMITS['tweets_per_request']),
+                tweet_fields=['created_at','author_id','public_metrics','text','entities','lang'],
+                expansions=['author_id'],
+                user_fields=['username','public_metrics','verified','location'],
+            )
+            tweets = response.data or []
+
+            # Process each v2 Tweet object
             for tweet in tweets:
                 tweet_data = {
-                    'tweet_id': tweet.id,
-                    'text': tweet.full_text,
-                    'user_id': tweet.user.id,
-                    'username': tweet.user.screen_name,
-                    'user_followers': tweet.user.followers_count,
-                    'user_following': tweet.user.friends_count,
-                    'user_verified': tweet.user.verified,
-                    'created_at': tweet.created_at,
-                    'retweet_count': tweet.retweet_count,
-                    'favorite_count': tweet.favorite_count,
-                    'quote_count': getattr(tweet, 'quote_count', 0),
-                    'reply_count': getattr(tweet, 'reply_count', 0),
-                    'hashtags': [tag['text'] for tag in tweet.entities.get('hashtags', [])],
-                    'mentions': [mention['screen_name'] for mention in tweet.entities.get('user_mentions', [])],
-                    'urls': [url['expanded_url'] for url in tweet.entities.get('urls', [])],
-                    'is_retweet': hasattr(tweet, 'retweeted_status'),
-                    'is_quote': hasattr(tweet, 'quoted_status'),
+                    'tweet_id': str(tweet.id),
+                    'text': tweet.text,
+                    'created_at': tweet.created_at.isoformat(),
+                    'retweet_count': tweet.public_metrics['retweet_count'],
+                    'like_count': tweet.public_metrics['like_count'],
+                    'reply_count': tweet.public_metrics['reply_count'],
+                    'quote_count': tweet.public_metrics['quote_count'],
                     'language': tweet.lang,
-                    'source': tweet.source,
-                    'location': tweet.user.location,
+                    'hashtags': [h['tag'] for h in (tweet.entities or {}).get('hashtags', [])],
+                    'mentions': [m['username'] for m in (tweet.entities or {}).get('mentions', [])],
                     'search_query': query
                 }
-                
                 tweets_data.append(tweet_data)
-                
+
         except Exception as e:
             self.logger.error(f"Error in collect_tweets_by_query: {e}")
-            raise
-        
         return tweets_data
-    
+
+
     def collect_all_topics(self) -> Dict[str, pd.DataFrame]:
         """
         Collect data for all configured topics
