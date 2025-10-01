@@ -1,16 +1,35 @@
 tweet_id,text,created_at,author_id,retweet_count,like_count,reply_count,quote_count,language,hashtags,mentions,topic,collection_timestamp
-1973214070716375440,"RT @HSariya3399: Minati Crypto Card
-#MNTC #Minatifi #MinatiCoin #Crypto #Blockchain #NFT #DeFi #AI #VirtualEconomy #CryptoBank #Metaverse #…",2025-10-01T02:31:09+00:00,2884186236,4,0,0,0,en,"['MNTC', 'Minatifi', 'MinatiCoin', 'Crypto', 'Blockchain', 'NFT', 'DeFi', 'AI', 'VirtualEconomy', 'CryptoBank', 'Metaverse']",['HSariya3399'],technology,2025-10-01 12:01:20.676412
-1973214050856444206,RT @Btschain_: We're building the future of entertainment with AI and the metaverse. Our blockchain network creates a transparent ecosystem…,2025-10-01T02:31:04+00:00,1872560590394400768,23,0,0,0,en,[],['Btschain_'],technology,2025-10-01 12:01:20.676412
-1973214047077310581,@AndrewArruda @AndrewYNg All in. AI’s sparking a whole new wave—just wait till startups light up. #AI,2025-10-01T02:31:04+00:00,1533770807142383616,0,0,0,0,en,['AI'],"['AndrewArruda', 'AndrewYNg']",technology,2025-10-01 12:01:20.676412
-1973214033550487992,"Callsi learns your business from your materials, fast.
+1.97E+18,RT @MargaretAd90824: Centralized clouds can’t handle the scale of billions of AI agents—but @AutonomysNet is already proving what’s possibl…,2025-10-01T02:16:06+00:00,1.84E+18,56,0,0,0,en,[],"['MargaretAd90824', 'AutonomysNet']",technology,46:18.6
+1.97E+18,"RT @MotorsportJP: アブダビの自律運転レーシングリーグ”A2RL”、2年目のシーズンが始動。1年前と比較して大幅進歩か？
+#A2RL #SFormula #AI 
+https://t.co/CyAsOfyfUV",2025-10-01T02:16:03+00:00,78047458,6,0,0,0,ja,"['A2RL', 'SFormula', 'AI']",['MotorsportJP'],technology,46:18.6
+1.97E+18,"RT @RajeshKB_99999: Minati is build to connect people from disant places.
+#Minatifi #crypto #tech #ecosystem #exchange #blockchain #crypton…",2025-10-01T02:16:01+00:00,1.92E+18,9,0,0,0,en,"['Minatifi', 'crypto', 'tech', 'ecosystem', 'exchange', 'blockchain']",['RajeshKB_99999'],technology,46:18.6
+1.97E+18,"RT @RajeshKB_99999: MInati Ecosystem is the largest one and has lot of use cases.
+#Minatifi #crypto #tech #ecosystem #exchange #blockchain…",2025-10-01T02:15:57+00:00,1.92E+18,6,0,0,0,en,"['Minatifi', 'crypto', 'tech', 'ecosystem', 'exchange', 'blockchain']",['RajeshKB_99999'],technology,46:18.6
+1.97E+18,"Inbox now for help and guide on how to recover lost accounts.
+#hacked #icloud #facebookdown #imessage #ransomware #snapchat #snapchatsupport #AI #MachineLearning #DataScience
+#Analytics #Robotics #innovation #Python
+#Flutter #TensorFlow #JavaScript #NLP
+#marketing #coding #NodeJS https://t.co/GjqnwN1b99",2025-10-01T02:15:56+00:00,1.83E+18,0,0,0,0,en,"['hacked', 'icloud', 'facebookdown', 'imessage', 'ransomware', 'snapchat', 'snapchatsupport', 'AI', 'MachineLearning', 'DataScience', 'Analytics', 'Robotics', 'innovation', 'Python', 'Flutter', 'TensorFlow', 'JavaScript', 'NLP', 'marketing', 'coding', 'NodeJS']",[],technology,46:18.6
+1.97E+18,RT @KarlanxAI: I had to make another picture of Yugi Muto and Joey Wheeler... my childhood crushes! 😳I think this one is much better. #Yaoi…,2025-10-01T02:15:56+00:00,1.90E+18,6,0,0,0,en,['Yaoi'],['KarlanxAI'],technology,46:18.6
+1.97E+18,"RT @RajeshKB_99999: Minati’s commitment to security and user experience is evident in its all-in-one wallet solution, simplifying the crypt…",2025-10-01T02:15:54+00:00,1.92E+18,2,0,0,0,en,[],['RajeshKB_99999'],technology,46:18.6
+1.97E+18,"RT @HSariya3399: There is endless opportunities in Minati
+#MNTC #Minatifi #MinatiCoin #Crypto #Blockchain #NFT #DeFi #AI #VirtualEconomy #C…",2025-10-01T02:15:50+00:00,1.92E+18,2,0,0,0,en,"['MNTC', 'Minatifi', 'MinatiCoin', 'Crypto', 'Blockchain', 'NFT', 'DeFi', 'AI', 'VirtualEconomy']",['HSariya3399'],technology,46:18.6
+1.97E+18,RT @Btschain_: 🗓 July 2025 • First interactive AI service launches within BTSc Metaverse Experience real-time AI interactions in our virtua…,2025-10-01T02:15:49+00:00,1.94E+18,66,0,0,0,en,[],['Btschain_'],technology,46:18.6
+1.97E+18,"Lufthansa Cuts 4,000 Jobs While Targeting €2.5 Billion Annual Cash Flow by 2030 #AI #TransportTech #DataAnalytics https://t.co/fhtl8CHkTE",2025-10-01T02:15:49+00:00,3298379074,0,0,0,0,en,"['AI', 'TransportTech', 'DataAnalytics']",[],technology,46:18.6
+1.97321E+18,"RT @HSariya3399: Minati Crypto Card
+#MNTC #Minatifi #MinatiCoin #Crypto #Blockchain #NFT #DeFi #AI #VirtualEconomy #CryptoBank #Metaverse #…",2025-10-01T02:31:09+00:00,2884186236,4,0,0,0,en,"['MNTC', 'Minatifi', 'MinatiCoin', 'Crypto', 'Blockchain', 'NFT', 'DeFi', 'AI', 'VirtualEconomy', 'CryptoBank', 'Metaverse']",['HSariya3399'],technology,01:20.7
+1.97321E+18,RT @Btschain_: We're building the future of entertainment with AI and the metaverse. Our blockchain network creates a transparent ecosystem…,2025-10-01T02:31:04+00:00,1.87256E+18,23,0,0,0,en,[],['Btschain_'],technology,01:20.7
+1.97321E+18,@AndrewArruda @AndrewYNg All in. AI’s sparking a whole new wave—just wait till startups light up. #AI,2025-10-01T02:31:04+00:00,1.53377E+18,0,0,0,0,en,['AI'],"['AndrewArruda', 'AndrewYNg']",technology,01:20.7
+1.97321E+18,"Callsi learns your business from your materials, fast.
 Get spot-on, contextual replies. No mistakes.
 Think of the time saved!
 https://t.co/tWGbzPLFBd
 
-#AI #Business #Efficiency #CustomerService #Automation https://t.co/BXeSa3QyYU",2025-10-01T02:31:00+00:00,1192000235616124928,0,0,0,0,en,"['AI', 'Business', 'Efficiency', 'CustomerService', 'Automation']",[],technology,2025-10-01 12:01:20.676412
-1973214033051558332,📡 $CRWV AI専用クラウドを提供する新星。GPUリソースを按分する“計算力の商社”とも。元は暗号マイニング→AIインフラに大転換。🛰️Metaと142億ドルの長期契約を締結。NVIDIAとも63億ドルのキャパ契約あり。大手との結びつきで収益の可視性UP。ただし顧客集中リスクは継続。#米国株 #AI #テック #半導体 https://t.co/IAtgiSxl2Z,2025-10-01T02:31:00+00:00,1911293494083325952,0,0,0,0,ja,"['米国株', 'AI', 'テック', '半導体']",[],technology,2025-10-01 12:01:20.676412
-1973214016546959516,"RT @ManuelhHernndez: Chudai 🥵
+#AI #Business #Efficiency #CustomerService #Automation https://t.co/BXeSa3QyYU",2025-10-01T02:31:00+00:00,1.192E+18,0,0,0,0,en,"['AI', 'Business', 'Efficiency', 'CustomerService', 'Automation']",[],technology,01:20.7
+1.97321E+18,📡 $CRWV AI専用クラウドを提供する新星。GPUリソースを按分する“計算力の商社”とも。元は暗号マイニング→AIインフラに大転換。🛰️Metaと142億ドルの長期契約を締結。NVIDIAとも63億ドルのキャパ契約あり。大手との結びつきで収益の可視性UP。ただし顧客集中リスクは継続。#米国株 #AI #テック #半導体 https://t.co/IAtgiSxl2Z,2025-10-01T02:31:00+00:00,1.91129E+18,0,0,0,0,ja,"['米国株', 'AI', 'テック', '半導体']",[],technology,01:20.7
+1.97321E+18,"RT @ManuelhHernndez: Chudai 🥵
 
 good night 🌜😈🌛
 @DoujinLewd
@@ -19,16 +38,16 @@ good night 🌜😈🌛
 @AlexBanner2934
 @Hentai_Land_
 @AsimpleNingen
-@y…",2025-10-01T02:30:56+00:00,1700896339364569088,151,0,0,0,en,[],"['ManuelhHernndez', 'DoujinLewd', 'DoujinSupremacy', 'Terry_The__king', 'AlexBanner2934', 'Hentai_Land_', 'AsimpleNingen']",technology,2025-10-01 12:01:20.676412
-1973214008829419768,"RT @HotSlut_69: I love it when you rub my pussy with your huge cock
+@y…",2025-10-01T02:30:56+00:00,1.7009E+18,151,0,0,0,en,[],"['ManuelhHernndez', 'DoujinLewd', 'DoujinSupremacy', 'Terry_The__king', 'AlexBanner2934', 'Hentai_Land_', 'AsimpleNingen']",technology,01:20.7
+1.97321E+18,"RT @HotSlut_69: I love it when you rub my pussy with your huge cock
 Like❤️, RT🔄 and Follow
-You can support me on 🅿️atreon, link in my profi…",2025-10-01T02:30:54+00:00,1596935212285546505,37,0,0,0,en,[],['HotSlut_69'],technology,2025-10-01 12:01:20.676412
-1973214006472221035,"RT @Cryptal_ai: New look. Same vision
+You can support me on 🅿️atreon, link in my profi…",2025-10-01T02:30:54+00:00,1.59694E+18,37,0,0,0,en,[],['HotSlut_69'],technology,01:20.7
+1.97321E+18,"RT @Cryptal_ai: New look. Same vision
 
 💡We’ve leveled up our look with a new logo, new design, and built for the scale of what’s next.
 
-💣Bi…",2025-10-01T02:30:54+00:00,1430708422429659136,1715,0,0,0,en,[],['Cryptal_ai'],technology,2025-10-01 12:01:20.676412
-1973214005696098592,"RT @BlocksterCom: 🌍 Dr. Jonathan Chang joins @0G_labs as Director to champion decentralized #AI (DeAI) as a public good.
+💣Bi…",2025-10-01T02:30:54+00:00,1.43071E+18,1715,0,0,0,en,[],['Cryptal_ai'],technology,01:20.7
+1.97321E+18,"RT @BlocksterCom: 🌍 Dr. Jonathan Chang joins @0G_labs as Director to champion decentralized #AI (DeAI) as a public good.
 
-Backed by $350M+,…",2025-10-01T02:30:54+00:00,403658252,212,0,0,0,en,['AI'],"['BlocksterCom', '0G_labs']",technology,2025-10-01 12:01:20.676412
-1973214004698026377,"RT @Btschain_: The future of entertainment is here. BTS Chain is at the forefront of the AI and metaverse revolution, powered by our AI-dri…",2025-10-01T02:30:53+00:00,1872560590394400768,41,0,0,0,en,[],['Btschain_'],technology,2025-10-01 12:01:20.676412
+Backed by $350M+,…",2025-10-01T02:30:54+00:00,403658252,212,0,0,0,en,['AI'],"['BlocksterCom', '0G_labs']",technology,01:20.7
+1.97321E+18,"RT @Btschain_: The future of entertainment is here. BTS Chain is at the forefront of the AI and metaverse revolution, powered by our AI-dri…",2025-10-01T02:30:53+00:00,1.87256E+18,41,0,0,0,en,[],['Btschain_'],technology,01:20.7
