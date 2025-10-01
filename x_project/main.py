@@ -1,7 +1,3 @@
-"""
-Main orchestration script for Twitter data collection and processing
-"""
-
 import argparse
 import logging
 import os

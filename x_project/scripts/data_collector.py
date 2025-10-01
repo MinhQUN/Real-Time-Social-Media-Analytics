@@ -85,64 +85,101 @@ class TwitterDataCollector:
         if topic not in TOPICS_CONFIG:
             raise ValueError(f"Unknown topic: {topic}")
         return TOPICS_CONFIG[topic].get('search_queries', [])
-
+    
+    def _map_v2_tweet(self, tweet) -> Dict[str, Any]:
+        """Map v2 Tweet object to dictionary format - THIS WAS MISSING!"""
+        try:
+            return {
+                'tweet_id': str(tweet.id),
+                'text': tweet.text,
+                'created_at': tweet.created_at.isoformat() if tweet.created_at else None,
+                'author_id': str(tweet.author_id) if tweet.author_id else None,
+                'retweet_count': tweet.public_metrics.get('retweet_count', 0) if hasattr(tweet, 'public_metrics') and tweet.public_metrics else 0,
+                'like_count': tweet.public_metrics.get('like_count', 0) if hasattr(tweet, 'public_metrics') and tweet.public_metrics else 0,
+                'reply_count': tweet.public_metrics.get('reply_count', 0) if hasattr(tweet, 'public_metrics') and tweet.public_metrics else 0,
+                'quote_count': tweet.public_metrics.get('quote_count', 0) if hasattr(tweet, 'public_metrics') and tweet.public_metrics else 0,
+                'language': getattr(tweet, 'lang', None),
+                'hashtags': [h['tag'] for h in (tweet.entities or {}).get('hashtags', [])] if hasattr(tweet, 'entities') and tweet.entities else [],
+                'mentions': [m['username'] for m in (tweet.entities or {}).get('mentions', [])] if hasattr(tweet, 'entities') and tweet.entities else [],
+            }
+        except Exception as e:
+            self.logger.error(f"Error mapping tweet {getattr(tweet, 'id', 'unknown')}: {e}")
+            return {
+                'tweet_id': str(getattr(tweet, 'id', 'unknown')),
+                'text': getattr(tweet, 'text', ''),
+                'created_at': None,
+                'author_id': None,
+                'retweet_count': 0,
+                'like_count': 0,
+                'reply_count': 0,
+                'quote_count': 0,
+                'language': None,
+                'hashtags': [],
+                'mentions': []
+            }
 
     def collect_tweets_for_topic(self, topic: str, count: int = 100) -> pd.DataFrame:
+        """Collect tweets for a single topic with proper error handling"""
         self.logger.info(f"Starting data collection for topic: {topic}")
         all_tweets = []
-        queries = self.build_search_query(topic)
-        per_query = max(10, min(RATE_LIMITS['tweets_per_request'], count // len(queries)))
+        
+        try:
+            queries = self.build_search_query(topic)
+            self.logger.info(f"Found {len(queries)} queries for {topic}")
+            per_query = max(10, min(RATE_LIMITS['tweets_per_request'], count // len(queries)))
 
-        for query in queries:
-            try:
-                # Use Paginator for manual rate‐limit control
-                paginator = Paginator(
-                    self.client.search_recent_tweets,
-                    query=query,
-                    tweet_fields=[
-                        'id','text','created_at','author_id','public_metrics',
-                        'lang','entities','context_annotations','conversation_id'
-                    ],
-                    expansions=['author_id'],
-                    user_fields=['username','public_metrics','verified','location'],
-                    max_results=per_query,
-                    limit=1,                    # only one batch per query
-                )
+            for i, query in enumerate(queries):
+                try:
+                    self.logger.info(f"Executing query {i+1}/{len(queries)}: {query} (max_results={per_query})")
+                    
+                    # Direct API call instead of Paginator for simplicity
+                    response = self.client.search_recent_tweets(
+                        query=query,
+                        max_results=per_query,
+                        tweet_fields=['id','text','created_at','author_id','public_metrics','lang','entities'],
+                        expansions=['author_id'],
+                        user_fields=['username','verified']
+                    )
+                    
+                    if response.data:
+                        all_tweets.extend(response.data)
+                        self.logger.info(f"Got {len(response.data)} tweets from query: {query}")
+                    else:
+                        self.logger.warning(f"No tweets returned for query: {query}")
+                    
+                    # Stop if we have enough tweets
+                    if len(all_tweets) >= count:
+                        break
+                        
+                except TooManyRequests:
+                    self.logger.warning(f"Rate limit hit on query: {query}")
+                    break  # Stop trying more queries
+                except Exception as e:
+                    self.logger.error(f"Error with query '{query}': {e}")
+                    continue
 
-                # flatten yields Tweet objects up to per_query
-                tweets = []
-                for tweet in paginator.flatten(limit=per_query):
-                    tweets.append(tweet)
-
-                all_tweets.extend(tweets)
-
-            except TooManyRequests:
-                self.logger.warning(
-                    f"Rate limit hit for '{topic}' on query '{query}'. "
-                    "Skipping remaining queries."
-                )
-                break
-
-            except Exception as e:
-                self.logger.error(f"Error collecting tweets for query '{query}': {e}")
-                continue
-
-        # Map to DataFrame
-        df = pd.DataFrame([self._map_v2_tweet(t) for t in all_tweets])
-        if not df.empty:
-            df['topic'] = topic
-            df['collection_timestamp'] = datetime.now()
-            self.logger.info(f"Collected {len(df)} tweets for topic: {topic}")
-        else:
-            self.logger.info(f"No tweets collected for topic: {topic}")
-
-        return df
+            # Convert to DataFrame
+            if all_tweets:
+                self.logger.info(f"Converting {len(all_tweets)} tweets to DataFrame")
+                tweet_dicts = [self._map_v2_tweet(tweet) for tweet in all_tweets]
+                df = pd.DataFrame(tweet_dicts)
+                df['topic'] = topic
+                df['collection_timestamp'] = datetime.now()
+                
+                self.logger.info(f"Successfully collected {len(df)} tweets for {topic}")
+                return df
+            else:
+                self.logger.warning(f"No tweets collected for {topic}")
+                return pd.DataFrame()
+                
+        except Exception as e:
+            self.logger.error(f"Fatal error collecting {topic}: {e}")
+            return pd.DataFrame()
     
 
     def collect_tweets_by_query(self, query: str, count: int) -> List[Dict[str, Any]]:
         tweets_data = []
         try:
-            # Use v2 search_recent_tweets
             response = self.client.search_recent_tweets(
                 query=query,
                 max_results=min(count, RATE_LIMITS['tweets_per_request']),
@@ -165,21 +202,9 @@ class TwitterDataCollector:
             )
             tweets = response.data or []
 
-            # Process each v2 Tweet object
             for tweet in tweets:
-                tweet_data = {
-                    'tweet_id': str(tweet.id),
-                    'text': tweet.text,
-                    'created_at': tweet.created_at.isoformat(),
-                    'retweet_count': tweet.public_metrics['retweet_count'],
-                    'like_count': tweet.public_metrics['like_count'],
-                    'reply_count': tweet.public_metrics['reply_count'],
-                    'quote_count': tweet.public_metrics['quote_count'],
-                    'language': tweet.lang,
-                    'hashtags': [h['tag'] for h in (tweet.entities or {}).get('hashtags', [])],
-                    'mentions': [m['username'] for m in (tweet.entities or {}).get('mentions', [])],
-                    'search_query': query
-                }
+                tweet_data = self._map_v2_tweet(tweet)
+                tweet_data['search_query'] = query
                 tweets_data.append(tweet_data)
 
         except Exception as e:
@@ -190,9 +215,6 @@ class TwitterDataCollector:
     def collect_all_topics(self) -> Dict[str, pd.DataFrame]:
         """
         Collect data for all configured topics
-        
-        Returns:
-            Dictionary mapping topic names to DataFrames
         """
         all_data = {}
         
@@ -212,34 +234,34 @@ class TwitterDataCollector:
         return all_data
     
     def save_raw_data(self, data: Dict[str, pd.DataFrame]) -> Dict[str, str]:
-        """
-        Save raw collected data to CSV files
-        
-        Args:
-            data: Dictionary mapping topic names to DataFrames
-            
-        Returns:
-            Dictionary mapping topic names to file paths
-        """
         file_paths = {}
         timestamp = datetime.now().strftime(FILE_NAMING['timestamp_format'])
         
+        os.makedirs(DATA_DIR, exist_ok=True) # Ensure base data directory exists
+
         for topic, df in data.items():
             if df.empty:
+                self.logger.warning(f"No data to save for topic: {topic}")
                 continue
                 
-            # Create topic directory
-            topic_dir = os.path.join(DATA_DIR, 'raw', topic)
-            os.makedirs(topic_dir, exist_ok=True)
-            
-            # Generate filename
-            filename = f"{FILE_NAMING['raw_data_prefix']}{topic}_{timestamp}.csv"
-            file_path = os.path.join(topic_dir, filename)
-            
-            # Save to CSV
-            df.to_csv(file_path, index=False)
-            file_paths[topic] = file_path
-            
-            self.logger.info(f"Saved {len(df)} tweets for {topic} to {file_path}")
+            try:
+                # Create topic directory
+                topic_dir = os.path.join(DATA_DIR, 'raw', topic)
+                os.makedirs(topic_dir, exist_ok=True)
+                
+                # Generate filename
+                filename = f"{FILE_NAMING['raw_data_prefix']}{topic}_{timestamp}.csv"
+                file_path = os.path.join(topic_dir, filename)
+                
+                # Save to CSV
+                df.to_csv(file_path, index=False, encoding='utf-8')
+                file_paths[topic] = file_path
+                
+                self.logger.info(f"✅ Saved {len(df)} tweets for {topic} to {file_path}")
+                print(f"✅ Data saved: {file_path}")  # Console feedback
+                
+            except Exception as e:
+                self.logger.error(f"❌ Failed to save data for {topic}: {e}")
+                print(f"❌ Save failed for {topic}: {e}")
         
         return file_paths
