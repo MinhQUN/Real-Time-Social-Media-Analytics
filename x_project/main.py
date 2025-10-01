@@ -4,6 +4,7 @@ import os
 import sys
 from datetime import datetime
 import time
+import random
 
 # Add project root to path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -43,7 +44,11 @@ def collect_and_process_data(topic_arg, count_arg):
     processor = TwitterDataProcessor()
     sentiment_analyzer = TwitterSentimentAnalyzer()
 
-    topics = [topic_arg] if topic_arg != 'all' else list(TOPICS_CONFIG.keys())
+    if topic_arg != 'all':
+        topics = [topic_arg]
+    else:
+        topics = list(TOPICS_CONFIG.keys())
+        random.shuffle(topics)       # Shuffle for random order each run
 
     for topic in topics:
         try:
