@@ -34,7 +34,6 @@ def setup_main_logging():
     return logging.getLogger(__name__)
 
 def collect_and_process_data(topic_arg, count_arg):
-    """Main data collection and processing workflow"""
     logger = setup_main_logging()
     logger.info("Starting Twitter data collection and processing workflow")
     
@@ -44,31 +43,36 @@ def collect_and_process_data(topic_arg, count_arg):
     processor = TwitterDataProcessor()
     sentiment_analyzer = TwitterSentimentAnalyzer()
 
-    # Determine which topics to run
     topics = [topic_arg] if topic_arg != 'all' else list(TOPICS_CONFIG.keys())
 
     for topic in topics:
         try:
             tweets_per_topic = count_arg if topic_arg != 'all' else COLLECTION_SETTINGS[topic]['tweets_per_collection']
             logger.info(f"Collecting raw data for {topic} (count={tweets_per_topic})")
+            
+            # 1. Collect into DataFrame
             df_raw = collector.collect_tweets_for_topic(topic, tweets_per_topic)
             if df_raw.empty:
                 logger.warning(f"No tweets collected for {topic}")
                 continue
 
+            # 2. Save raw CSV but DON'T overwrite df_raw
             raw_path = collector.save_raw_data({topic: df_raw})[topic]
             results['raw_files'][topic] = raw_path
 
+            # 3. Clean using the DataFrame
             logger.info(f"Cleaning data for {topic}")
-            df_clean = cleaner.clean_topic_data(topic, df_raw)
+            df_clean = cleaner.clean_topic_data(topic, df_raw)   # pass df_raw
             clean_path = cleaner.save_cleaned_data({topic: df_clean})[topic]
             results['cleaned_files'][topic] = clean_path
 
+            # 4. Process
             logger.info(f"Processing data for {topic}")
             df_proc = processor.process_topic_data(df_clean, topic)
             tableau_path = processor.save_tableau_data({topic: df_proc})[topic]
             results['tableau_files'][topic] = tableau_path
 
+            # 5. Sentiment
             logger.info(f"Analyzing sentiment for {topic}")
             df_sent = sentiment_analyzer.analyze_topic_sentiment(topic, df_clean)
             sent_path = sentiment_analyzer.save_sentiment_data({topic: df_sent})[topic]
@@ -79,6 +83,7 @@ def collect_and_process_data(topic_arg, count_arg):
 
     logger.info("Pipeline complete")
     return results
+
 
 def start_realtime_mode():
     """Start continuous real-time collection and processing"""
