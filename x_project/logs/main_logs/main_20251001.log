@@ -21,3 +21,18 @@
 2025-10-01 12:15:39,145 - scripts.data_collector - INFO - Found 7 queries for stock_market
 2025-10-01 12:15:39,145 - scripts.data_collector - INFO - Executing query 1/7: #StockMarket OR #Trading OR #Investing (max_results=10)
 2025-10-01 12:15:39,396 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 43 seconds.
+2025-10-01 12:17:27,066 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-10-01 12:17:27,066 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-10-01 12:17:27,066 - __main__ - INFO - Collecting raw data for sports (count=5)
+2025-10-01 12:17:27,066 - scripts.data_collector - INFO - Starting data collection for topic: sports
+2025-10-01 12:17:27,066 - scripts.data_collector - INFO - Found 9 queries for sports
+2025-10-01 12:17:27,066 - scripts.data_collector - INFO - Executing query 1/9: #Sports OR #Football OR #Basketball (max_results=10)
+2025-10-01 12:17:27,442 - scripts.data_collector - INFO - Got 10 tweets from query: #Sports OR #Football OR #Basketball
+2025-10-01 12:17:27,442 - scripts.data_collector - INFO - Converting 10 tweets to DataFrame
+2025-10-01 12:17:27,442 - scripts.data_collector - INFO - Successfully collected 10 tweets for sports
+2025-10-01 12:17:27,458 - __main__ - INFO - Cleaning data for sports
+2025-10-01 12:17:27,460 - __main__ - INFO - Collecting raw data for technology (count=5)
+2025-10-01 12:17:27,460 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-10-01 12:17:27,460 - scripts.data_collector - INFO - Found 10 queries for technology
+2025-10-01 12:17:27,460 - scripts.data_collector - INFO - Executing query 1/10: #AI OR #MachineLearning OR #TechNews (max_results=10)
+2025-10-01 12:17:27,671 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 902 seconds.
