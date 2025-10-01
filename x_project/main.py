@@ -89,23 +89,23 @@ def start_realtime_mode():
         rtc = RealTimeCollector()
         threads = rtc.start_realtime_collection()
         
-        print("🔄 Real-time collection started. Press Ctrl+C to stop...")
-        print("📁 Check data/raw/, data/cleaned/, and tableau_data/ for files")
+        print(" Real-time collection started. Press Ctrl+C to stop...")
+        print(" Check data/raw/, data/cleaned/, and tableau_data/ for files")
         
         while True:
             time.sleep(1)
 
     except KeyboardInterrupt:
-        print("\n📤 Stopping real-time collection...")
+        print("\n Stopping real-time collection...")
         rtc.stop_collection()
         for thread in threads:
             thread.join(timeout=5)
         logger.info("Real-time collection stopped by user")
-        print("✅ Real-time collection stopped successfully")
+        print("Real-time collection stopped successfully")
 
     except Exception as e:
         logger.error(f"Error in real-time mode: {e}", exc_info=True)
-        print(f"❌ Real-time collection failed: {e}")
+        print(f"Real-time collection failed: {e}")
 
 def main():
     """Main function with command line argument parsing"""

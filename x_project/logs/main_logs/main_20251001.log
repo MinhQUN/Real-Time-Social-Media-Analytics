@@ -1,0 +1,16 @@
+2025-10-01 12:00:03,144 - __main__ - INFO - Starting Twitter data collection and processing workflow
+2025-10-01 12:00:03,148 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-10-01 12:00:03,149 - __main__ - INFO - Collecting raw data for technology (count=5)
+2025-10-01 12:00:03,149 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-10-01 12:00:03,149 - scripts.data_collector - INFO - Found 10 queries for technology
+2025-10-01 12:00:03,149 - scripts.data_collector - INFO - Executing query 1/10: #AI OR #MachineLearning OR #TechNews (max_results=10)
+2025-10-01 12:00:03,392 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 77 seconds.
+2025-10-01 12:01:20,676 - scripts.data_collector - INFO - Got 10 tweets from query: #AI OR #MachineLearning OR #TechNews
+2025-10-01 12:01:20,676 - scripts.data_collector - INFO - Converting 10 tweets to DataFrame
+2025-10-01 12:01:20,676 - scripts.data_collector - INFO - Successfully collected 10 tweets for technology
+2025-10-01 12:01:20,695 - __main__ - INFO - Cleaning data for technology
+2025-10-01 12:01:20,696 - __main__ - INFO - Collecting raw data for stock_market (count=10)
+2025-10-01 12:01:20,696 - scripts.data_collector - INFO - Starting data collection for topic: stock_market
+2025-10-01 12:01:20,696 - scripts.data_collector - INFO - Found 7 queries for stock_market
+2025-10-01 12:01:20,696 - scripts.data_collector - INFO - Executing query 1/7: #StockMarket OR #Trading OR #Investing (max_results=10)
+2025-10-01 12:01:20,892 - tweepy.client - WARNING - Rate limit exceeded. Sleeping for 902 seconds.
