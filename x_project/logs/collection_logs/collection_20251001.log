@@ -1,0 +1,7 @@
+2025-10-01 11:46:18,221 - scripts.data_collector - INFO - Authentication successful (OAuth1.0a and OAuth2.0 initialized)
+2025-10-01 11:46:18,221 - scripts.data_collector - INFO - Starting data collection for topic: technology
+2025-10-01 11:46:18,221 - scripts.data_collector - INFO - Found 10 queries for technology
+2025-10-01 11:46:18,221 - scripts.data_collector - INFO - Executing query 1/10: #AI OR #MachineLearning OR #TechNews (max_results=10)
+2025-10-01 11:46:18,618 - scripts.data_collector - INFO - Got 10 tweets from query: #AI OR #MachineLearning OR #TechNews
+2025-10-01 11:46:18,618 - scripts.data_collector - INFO - Converting 10 tweets to DataFrame
+2025-10-01 11:46:18,627 - scripts.data_collector - INFO - Successfully collected 10 tweets for technology
