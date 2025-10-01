@@ -67,7 +67,7 @@ def collect_and_process_data(topic_arg, count_arg):
 
             # 3. Clean using the DataFrame
             logger.info(f"Cleaning data for {topic}")
-            df_clean = cleaner.clean_topic_data(topic, raw_path)  # Use raw_path to avoid overwriting df_raw
+            df_clean = cleaner.clean_topic_data(topic, df_raw) 
             clean_path = cleaner.save_cleaned_data({topic: df_clean})[topic]
             results['cleaned_files'][topic] = clean_path
 
